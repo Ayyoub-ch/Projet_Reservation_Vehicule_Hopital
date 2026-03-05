@@ -1,3 +1,4 @@
+package src;
 public class Type {
     //Attributs
     private int numero;

@@ -1,3 +1,4 @@
+package src;
 public class Vehicule {
     private String immat;
     private String marque;

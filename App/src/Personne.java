@@ -1,3 +1,4 @@
+package src;
 public class Personne {
     // Attributs
     private String matricule;
