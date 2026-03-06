@@ -11,7 +11,7 @@ public class Menu {
         boolean continuer = true;
 
         while (continuer) {
-            clearConsole();
+            // clearConsole();
             afficherBienvenue();
             System.out.println("\n===== MENU PRINCIPAL =====");
             System.out.println("1. Faire une réservation");
@@ -46,7 +46,7 @@ public class Menu {
     }
 
     public boolean menuConnexion(Scanner s, Passerelle db) {
-        clearConsole();
+        // clearConsole();
         afficherBienvenue();
 
         System.out.println("===== CONNEXION =====");
@@ -72,7 +72,7 @@ public class Menu {
     }
 
     public void menuReservation(Scanner s) {
-        clearConsole();
+        // clearConsole();
         // Réservation des Véhicules
         System.out.println("\n===== RESERVATION =====");
         System.out.print("Combien de vehicules souhaitez-vous reserver ? ");

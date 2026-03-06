@@ -8,14 +8,28 @@ import java.time.LocalDate;
 public class Passerelle {
     private String url = "jdbc:postgresql://localhost:5432/reservation_vehicule";
     private String user = "postgres";
-    private String passwd = "";
+    private String passwd = "m7S0$]G1O3/£";
     private java.sql.Connection conn;
+    private String connectionError;
 
     public Passerelle() {
         try {
             this.conn = DriverManager.getConnection(url, user, passwd);
+            this.connectionError = null;
         } catch (Exception e) {
+            this.conn = null;
+            this.connectionError = e.getMessage();
+            System.out.println("ERREUR - Connexion DB impossible : " + e.getMessage());
         }
+    }
+
+    private boolean hasConnection() {
+        if (conn != null) {
+            return true;
+        }
+        String detail = (connectionError == null || connectionError.isBlank()) ? "cause inconnue" : connectionError;
+        System.out.println("ERREUR - Connexion DB non initialisee : " + detail);
+        return false;
     }
 
     public java.sql.Connection getConnection() {
@@ -32,6 +46,9 @@ public class Passerelle {
     }
 
     public boolean verifierConnexion(int matricule, String mdp) {
+        if (!hasConnection()) {
+            return false;
+        }
         try {
             PreparedStatement stmt = conn
                     .prepareStatement("SELECT nom, prenom FROM personne WHERE matricule = ?  AND mdp = ?");
@@ -71,6 +88,9 @@ public class Passerelle {
     // Réutilisable pour afficher le numero du type dans le cas de la réservation ou
     // de la modif si besoin
     public Type recupererTypeParNumero(int numero) {
+        if (!hasConnection()) {
+            return null;
+        }
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT noType, libelle FROM type WHERE noType = ?");
             stmt.setInt(1, numero);
@@ -88,6 +108,10 @@ public class Passerelle {
             LocalDate dateDebut, String matricule,
             int noType, String immat, int duree,
             LocalDate dateRetourEffectif, String etat) {
+
+        if (!hasConnection()) {
+            return;
+        }
 
         try {
             PreparedStatement stmt = conn
@@ -121,6 +145,9 @@ public class Passerelle {
     // Fonction de Validation du Véhicule
     public boolean verifierReservation(String marque, String modele, Type unType, String immat) {
         boolean verif = false;
+        if (!hasConnection()) {
+            return false;
+        }
         try {
             PreparedStatement stmt = conn
                     .prepareStatement(
@@ -150,6 +177,9 @@ public class Passerelle {
     }
 
     public boolean reservationExiste(int numero, LocalDate datereserv) {
+        if (!hasConnection()) {
+            return false;
+        }
         try {
             PreparedStatement stmt = conn.prepareStatement(
                     "SELECT COUNT(*) FROM demande WHERE nodemande = ? AND datereserv = ?");
