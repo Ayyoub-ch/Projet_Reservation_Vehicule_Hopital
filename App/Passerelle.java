@@ -83,6 +83,41 @@ public class Passerelle {
         }
     }
 
+    public Demande ReservationVehicule(int typeVehicule, LocalDate dateReservation, LocalDate dateDebut, LocalDate dateFin, int duree) {
+        if (!hasConnection()) {
+            return null;
+        }
+        try {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "SELECT v.immat, v.marque, v.modele FROM vehicule v WHERE v.noType = ? AND v.immat NOT IN (SELECT d.immat FROM demande d WHERE d.notype = ? AND ((d.datedebut <= ? AND d.dateretoureffectif >= ?) OR (d.datedebut <= ? AND d.dateretoureffectif >= ?) OR (d.datedebut >= ? AND d.dateretoureffectif <= ?)))) LIMIT 1");
+            stmt.setInt(1, typeVehicule);
+            stmt.setInt(2, typeVehicule);
+            stmt.setDate(3, java.sql.Date.valueOf(dateDebut));
+            stmt.setDate(4, java.sql.Date.valueOf(dateDebut));
+            stmt.setDate(5, java.sql.Date.valueOf(dateFin));
+            stmt.setDate(6, java.sql.Date.valueOf(dateFin));
+            stmt.setDate(7, java.sql.Date.valueOf(dateDebut));
+            stmt.setDate(8, java.sql.Date.valueOf(dateFin));
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String immat = rs.getString("immat");
+                String marque = rs.getString("marque");
+                String modele = rs.getString("modele");
+                System.out.println("OK - Véhicule trouvé : " + immat + " | " + marque + " | " + modele);
+                return new Demande(dateReservation.toString(), 0, dateDebut.toString(), null, typeVehicule, immat,
+                        duree, dateFin.toString(), "EN ATTENTE");
+            } else {
+                System.out.println("ERREUR - Aucun véhicule disponible pour les dates sélectionnées.");
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println("ERREUR - " + e.getMessage());
+            return null;
+        }
+    }
+
     // Fonction crée pour récupérer le numéro du type afin de fludifier la
     // vérification de la réservation
     // Réutilisable pour afficher le numero du type dans le cas de la réservation ou

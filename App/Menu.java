@@ -26,7 +26,7 @@ public class Menu {
 
             switch (choix) {
                 case 1:
-                    menuReservation(scanner);
+                    menuReservation(scanner,db);
                     break;
                 case 2:
                     menuVerificationDisponibilite(scanner, db);
@@ -71,17 +71,29 @@ public class Menu {
         return connecte;
     }
 
-    public void menuReservation(Scanner s) {
+    public void menuReservation(Scanner s, Passerelle db) {
         // clearConsole();
         // Réservation des Véhicules
         System.out.println("\n===== RESERVATION =====");
-        System.out.print("Combien de vehicules souhaitez-vous reserver ? ");
-        System.out.println(); // ligne vide pour aérer
-        // Ajout des véhicules
-        // Avec type, heure, priorité etc ....
+        
+        System.out.print("Quel véhicule souhaitez-vous réserver ? (1: Voiture, 2: Camionnette, 3: Moto, 4: Véhicule Utilitaire) ");
+        int typeVehicule = s.nextInt(); //#notype
 
-        // Simulation du processus de réservation
-        // ... code de réservation ...
+        s.nextLine();
+
+        System.out.println(); // ligne vide pour aérer
+
+        LocalDate dateReservation = LocalDate.now(); //datereserv
+
+        System.out.print("Entrez la date de début de réservation (AAAA-MM-JJ) : ");
+        LocalDate dateDebut = LocalDate.parse(s.nextLine()); //datedebut
+
+        System.out.print("Entrez la date de fin de réservation (AAAA-MM-JJ) : ");
+        LocalDate dateFin = LocalDate.parse(s.nextLine()); //dateretoureffectif
+
+        System.out.print("Entrez la durée de la réservation (en heures) : ");
+        int duree = s.nextInt(); //duree
+        s.nextLine(); // consomme le retour à la ligne
 
         System.out.println("\nReservation terminee !");
         System.out.println("\nAppuyez sur Entree pour revenir au menu principal...");
