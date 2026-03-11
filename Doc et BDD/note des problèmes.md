@@ -25,3 +25,12 @@ ERREUR récupération Type : ERREUR: la colonne « notype » n'existe pas
 
 
 Petite pensée à faire : retirer la commentation des clearConsole() dans Menu.java
+
+
+11/03:
+- J'ai réussi à écrire la méthode MenuReservation, seulement dans la classe Passerelle il faut que j'arrive à bien faire les autres classes si besoin et surtout à faire fonctionner l'INSERT dans la bdd
+
+A faire:
+-Menu Reservation
+-Corriger les Classes métiers (Probablement)
+-Vérifier si le reste va bien
