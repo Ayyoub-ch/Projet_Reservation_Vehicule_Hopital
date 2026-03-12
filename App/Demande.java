@@ -2,7 +2,7 @@ public class Demande {
     // Attributs
     private String datereserv;
     private int numero;
-    private String datedebyt;
+    private String datedebut;
     private Personne personne;
     private String notype;
     private Vehicule vehicule;
@@ -10,11 +10,11 @@ public class Demande {
     private String dateretoureffectif;
     private String etat;
 
-    public Demande(String datereserv, int numero, String datedebyt, Personne personne, String notype, Vehicule vehicule,
+    public Demande(String datereserv, int numero, String datedebut, Personne personne, String notype, Vehicule vehicule,
             int duree, String dateretoureffectif, String etat) {
         this.datereserv = datereserv;
         this.numero = numero;
-        this.datedebyt = datedebyt;
+        this.datedebut = datedebut;
         this.personne = personne;
         this.notype = notype;
         this.vehicule = vehicule;
@@ -39,12 +39,12 @@ public class Demande {
         this.numero = numero;
     }
 
-    public String getDatedebyt() {
-        return datedebyt;
+    public String getDatedebut() {
+        return datedebut;
     }
 
-    public void setDatedebyt(String datedebyt) {
-        this.datedebyt = datedebyt;
+    public void setDatedebut(String datedebut) {
+        this.datedebut = datedebut;
     }
 
     public Personne getPersonne() {
@@ -97,7 +97,7 @@ public class Demande {
 
     @Override
     public String toString() {
-        return "Demande [datereserv=" + datereserv + ", numero=" + numero + ", datedebyt=" + datedebyt + ", personne="
+        return "Demande [datereserv=" + datereserv + ", numero=" + numero + ", datedebut=" + datedebut + ", personne="
                 + personne + ", notype=" + notype + ", vehicule=" + vehicule + ", duree=" + duree
                 + ", dateretoureffectif="
                 + dateretoureffectif + ", etat=" + etat + "]";

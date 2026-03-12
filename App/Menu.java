@@ -95,6 +95,9 @@ public class Menu {
         int duree = s.nextInt(); //duree
         s.nextLine(); // consomme le retour à la ligne
 
+        //Appel de la fonction ReservationVehicule
+        //db.ReservationVehicule()
+
         System.out.println("\nReservation terminee !");
         System.out.println("\nAppuyez sur Entree pour revenir au menu principal...");
         s.nextLine();
