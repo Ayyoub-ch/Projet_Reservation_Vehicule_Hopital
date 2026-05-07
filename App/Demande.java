@@ -4,16 +4,16 @@ public class Demande {
     private int numero;
     private String datedebut;
     private Personne personne;
-    private String notype;
+    private int notype;
     private Vehicule vehicule;
     private int duree;
     private String dateretoureffectif;
     private String etat;
 
-    public Demande(String datereserv, int numero, String datedebut, Personne personne, String notype, Vehicule vehicule,
+    public Demande(String datereserv, String datedebut, Personne personne, int notype, Vehicule vehicule,
             int duree, String dateretoureffectif, String etat) {
         this.datereserv = datereserv;
-        this.numero = numero;
+        //this.numero = numero;
         this.datedebut = datedebut;
         this.personne = personne;
         this.notype = notype;
@@ -22,7 +22,8 @@ public class Demande {
         this.dateretoureffectif = dateretoureffectif;
         this.etat = etat;
     }
-// Getters et setters
+
+    // Getters et setters
     public String getDatereserv() {
         return datereserv;
     }
@@ -55,11 +56,11 @@ public class Demande {
         this.personne = personne;
     }
 
-    public String getNotype() {
+    public int getNotype() {
         return notype;
     }
 
-    public void setNotype(String notype) {
+    public void setNotype(int notype) {
         this.notype = notype;
     }
 
@@ -101,6 +102,45 @@ public class Demande {
                 + personne + ", notype=" + notype + ", vehicule=" + vehicule + ", duree=" + duree
                 + ", dateretoureffectif="
                 + dateretoureffectif + ", etat=" + etat + "]";
+    }
+
+    /**
+     * Méthode pour créer une nouvelle demande de réservation
+     * 
+     * @param db Passerelle vers la base de données
+     * @return true si la demande a été créée avec succès, false sinon
+     */
+    public boolean faireDemande(Passerelle db) {
+        try {
+            // Vérifier que les données essentielles sont présentes
+            if (this.datereserv == null || this.datedebut == null ||
+                    this.personne == null || this.vehicule == null) {
+                System.out.println("ERREUR - Données manquantes pour créer la demande");
+                return false;
+            }
+
+            // Insérer la demande dans la base de données
+            boolean resultat = db.insererDemande(
+                    this.datereserv,
+                    this.datedebut,
+                    this.personne.getMatricule(),
+                    this.notype,
+                    this.duree,
+                    this.dateretoureffectif, // date de retour effectif
+                    this.etat != null ? this.etat : "En attente",
+                    this.vehicule.getImmat());
+
+            if (resultat) {
+                System.out.println("✓ Demande de réservation créée avec succès");
+                return true;
+            } else {
+                System.out.println("✗ Échec de la création de la demande");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("ERREUR - " + e.getMessage());
+            return false;
+        }
     }
 
 }
