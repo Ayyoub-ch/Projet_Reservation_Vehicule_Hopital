@@ -8,6 +8,14 @@ public class Vehicule {
         this.immat = immat;
         this.marque = marque;
         this.modele = modele;
+        this.unType = null;
+    }
+
+    public Vehicule(String immat, String marque, String modele, Type unType) {
+        this.immat = immat;
+        this.marque = marque;
+        this.modele = modele;
+        this.unType = unType;
     }
 
     public String getImmat() {
@@ -33,7 +41,22 @@ public class Vehicule {
     public void setModele(String modele) {
         this.modele = modele;
     }
-   
-    
-}
 
+    public Type getUnType() {
+        return unType;
+    }
+
+    public void setUnType(Type unType) {
+        this.unType = unType;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicule{" +
+                "immat='" + immat + '\'' +
+                ", marque='" + marque + '\'' +
+                ", modele='" + modele + '\'' +
+                ", type=" + (unType != null ? unType.getLibelle() : "N/A") +
+                '}';
+    }
+}
