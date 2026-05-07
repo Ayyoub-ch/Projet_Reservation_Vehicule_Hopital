@@ -1,14 +1,22 @@
 public class Personne {
     // Attributs
-    private String matricule;
-    private String  nom;
+    private int matricule;
+    private String nom;
     private String telephone;
     private Service unService;
 
-    public Personne(String matricule, String nom, String telephone) {
+    public Personne(int matricule, String nom, String telephone) {
         this.matricule = matricule;
         this.nom = nom;
         this.telephone = telephone;
+        this.unService = null;
+    }
+
+    public Personne(int matricule, String nom, String telephone, Service unService) {
+        this.matricule = matricule;
+        this.nom = nom;
+        this.telephone = telephone;
+        this.unService = unService;
     }
     // getters et setters
 
@@ -17,11 +25,11 @@ public class Personne {
         return "Personne{" + "matricule=" + matricule + ", nom=" + nom + ", telephone=" + telephone + '}';
     }
 
-    public String getMatricule() {
+    public int getMatricule() {
         return matricule;
     }
 
-    public void setMatricule(String matricule) {
+    public void setMatricule(int matricule) {
         this.matricule = matricule;
     }
 
@@ -39,8 +47,13 @@ public class Personne {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    } 
-    
-    
-}
+    }
 
+    public Service getUnService() {
+        return unService;
+    }
+
+    public void setUnService(Service unService) {
+        this.unService = unService;
+    }
+}
