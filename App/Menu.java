@@ -257,6 +257,7 @@ public class Menu {
             System.out.println("Ce vehicule " + modele + " est disponible.");
 
             System.out.println("\nVotre reservation a ete validee pour les vehicules suivants :");
+            System.out.println("\nVerification terminee !");
             // TO STRING des véhicules les affichant en réservation
             // Avec le nom, le prénom et les véhicules pour telle heure
         } else {
@@ -266,8 +267,6 @@ public class Menu {
             // Refaire la demande au besoin
             System.out.println("Aucun vehicule disponible. Merci de reessayer plus tard.");
         }
-
-        System.out.println("\nVerification terminee !");
         System.out.println("\nAppuyez sur Entree pour revenir au menu principal...");
         s.nextLine();
     }
