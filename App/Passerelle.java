@@ -11,7 +11,7 @@ public class Passerelle {
     // ── Paramètres de connexion ─────────────────────────────────────────────
     private static final String URL    = "jdbc:postgresql://localhost:5432/reservation_vehicule_sio2";
     private static final String USER   = "postgres";
-    private static final String PASSWD = "m7S0$]G1O3/£"; 
+    private static final String PASSWD = "m7S0$]G1O3/£";
 
     // ── État interne ────────────────────────────────────────────────────────
     private Connection conn = null;
@@ -112,12 +112,12 @@ public class Passerelle {
 
     // ── Requêtes metier ─────────────────────────────────────────────────────
 
-    public Type recupererTypeParNumero(int numero) {
+    public Type recupererTypeParNumero(int notype) {
         if (!isConnected()) return null;
 
         String sql = "SELECT type.notype, type.libelle FROM type WHERE notype = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, numero);
+            stmt.setInt(1, notype);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Type(rs.getInt("notype"), rs.getString("libelle"));
@@ -165,12 +165,13 @@ public class Passerelle {
     }
 
     public boolean verifierReservation(String marque, String modele, Type unType, String immat) {
-        String sql = "SELECT COUNT(*) FROM vehicule "
-                   + "WHERE marque = ? AND modele = ? AND vehicule.noType = ? AND immat = ?";
+        String sql = "SELECT COUNT(*) FROM vehicule " 
+                    + "JOIN type ON vehicule.\"noType\" = type.notype "
+                   + "WHERE marque = ? AND modele = ? AND vehicule.\"noType\" = ? AND immat = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, marque);
             stmt.setString(2, modele);
-            stmt.setInt(3, unType.getNumero());
+            stmt.setInt(3, unType.getNotype());
             stmt.setString(4, immat);
 
             try (ResultSet rs = stmt.executeQuery()) {
