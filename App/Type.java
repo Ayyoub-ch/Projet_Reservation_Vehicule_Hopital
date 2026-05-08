@@ -1,19 +1,19 @@
 public class Type {
     //Attributs
-    private int numero;
+    private int notype;
     private String libelle;
 
-    public Type(int numero, String libelle) {
-        this.numero = numero;
+    public Type(int notype, String libelle) {
+        this.notype = notype;
         this.libelle = libelle;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getNotype() {
+        return notype;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNotype(int notype) {
+        this.notype = notype;
     }
 
     public String getLibelle() {
@@ -26,7 +26,7 @@ public class Type {
 
     @Override
     public String toString() {
-        return "Type{" + "numero=" + numero + ", libelle=" + libelle + '}';
+        return "Type{" + "notype=" + notype + ", libelle=" + libelle + '}';
     }
     
     
