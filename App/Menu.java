@@ -56,7 +56,7 @@ public class Menu {
                     break;
                 case 4:
                     clearConsole();
-                    db.afficherMesReservations("" + db.getMatriculeConnecte());
+                    db.afficherMesReservations(db.getMatriculeConnecte());
                     System.out.println("\nAppuyez sur Entrée pour continuer...");
                     scanner.nextLine();
                     break;
@@ -67,14 +67,14 @@ public class Menu {
                         System.out.println("\nAppuyez sur Entrée pour continuer...");
                         scanner.nextLine();
                     } else {
-                        System.out.println("❌ Accès refusé - droits insuffisants.");
+                        System.out.println("Accès refusé - droits insuffisants.");
                     }
                     break;
                 case 6:
                     if (isAdmin) {
                         menuValidationReservation(scanner, db);
                     } else {
-                        System.out.println("❌ Accès refusé - droits insuffisants.");
+                        System.out.println("Accès refusé - droits insuffisants.");
                     }
                     break;
                 case 0:
@@ -111,7 +111,7 @@ public class Menu {
             try {
                 matricule = Integer.parseInt(matriculeStr);
             } catch (NumberFormatException e) {
-                System.out.println("❌ Le matricule doit être un nombre entier.");
+                System.out.println("Le matricule doit être un nombre entier.");
                 tentatives++;
                 continue;
             }
@@ -210,11 +210,11 @@ public class Menu {
                 System.out.println("Véhicule : " + vehicule.getMarque() + " " + vehicule.getModele());
                 System.out.println("Du " + dateDebut + " pour " + duree + " jour(s)");
             } else {
-                System.out.println("\n❌ Erreur lors de la création de la réservation.");
+                System.out.println("\nErreur lors de la création de la réservation.");
             }
 
         } catch (Exception e) {
-            System.out.println("\n❌ ERREUR - " + e.getMessage());
+            System.out.println("\nERREUR - " + e.getMessage());
         }
 
         System.out.println("\nAppuyez sur Entrée pour revenir au menu principal...");
@@ -284,9 +284,9 @@ public class Menu {
             LocalDate datereserv = LocalDate.parse(s.nextLine());
 
             if (!db.reservationExiste(numero, datereserv)) {
-                System.out.println("\n❌ Aucune réservation trouvée avec ce numéro et cette date !");
+                System.out.println("\n Aucune réservation trouvée avec ce numéro et cette date !");
             } else {
-                System.out.println("\n✅ Réservation trouvée. Saisissez les champs à modifier :");
+                System.out.println("\n Réservation trouvée. Saisissez les champs à modifier :");
                 System.out.print("Nouvelle date de début (AAAA-MM-JJ) : ");
                 LocalDate dateDebut = LocalDate.parse(s.nextLine());
 
@@ -317,7 +317,7 @@ public class Menu {
                         dateRetourEffectif, etat);
             }
         } catch (Exception e) {
-            System.out.println("\n❌ ERREUR - " + e.getMessage());
+            System.out.println("\nERREUR - " + e.getMessage());
         }
 
         System.out.println("\nAppuyez sur Entrée pour revenir au menu principal...");
@@ -335,7 +335,7 @@ public class Menu {
         try {
             numero = Integer.parseInt(s.nextLine().trim());
         } catch (NumberFormatException ignored) {
-            System.out.println("❌ Numéro invalide.");
+            System.out.println("Numéro invalide.");
             System.out.println("\nAppuyez sur Entrée pour revenir au menu principal...");
             s.nextLine();
             return;
@@ -350,7 +350,7 @@ public class Menu {
         try {
             datereserv = LocalDate.parse(s.nextLine().trim());
         } catch (Exception ignored) {
-            System.out.println("❌ Date invalide.");
+            System.out.println("Date invalide.");
             System.out.println("\nAppuyez sur Entrée pour revenir au menu principal...");
             s.nextLine();
             return;
@@ -366,7 +366,7 @@ public class Menu {
         try {
             choix = Integer.parseInt(s.nextLine().trim());
         } catch (NumberFormatException ignored) {
-            System.out.println("❌ Choix invalide.");
+            System.out.println("Choix invalide.");
             System.out.println("\nAppuyez sur Entrée pour revenir au menu principal...");
             s.nextLine();
             return;
@@ -383,7 +383,7 @@ public class Menu {
                 System.out.println("Opération annulée.");
                 break;
             default:
-                System.out.println("❌ Choix invalide.");
+                System.out.println("Choix invalide.");
                 break;
         }
 
