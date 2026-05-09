@@ -400,7 +400,7 @@ public class Passerelle {
         }
     }
 
-    public void afficherMesReservations(String matricule) {
+    public void afficherMesReservations(int matricule) {
         String sql = "SELECT d.numero, d.datereserv, d.datedebut, d.duree, d.etat, "
                    + "v.marque, v.modele, v.immat "
                    + "FROM demande d "
@@ -409,7 +409,7 @@ public class Passerelle {
                    + "ORDER BY d.datedebut DESC";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, matricule);
+            stmt.setInt(1, matricule);
             try (ResultSet rs = stmt.executeQuery()) {
                 System.out.println("\n=== VOS RESERVATIONS ===");
                 boolean trouve = false;
