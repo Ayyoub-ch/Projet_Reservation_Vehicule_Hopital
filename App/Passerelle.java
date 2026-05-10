@@ -132,10 +132,10 @@ public class Passerelle {
     public void modifierReservation(int numero, LocalDate datereserv,
             LocalDate dateDebut, int matricule,
             int noType, String immat, int duree,
-            LocalDate dateRetourEffectif, String etat) {
-
+            LocalDate dateRetourEffectif) {
+// , String etat (avec dans le cas où l'utilisateur lambda peut modifier l'état )
         String sql = "UPDATE demande SET datedebut = ?, matricule = ?, notype = ?, immat = ?, "
-                   + "duree = ?, dateretoureffectif = ?, etat = ? "
+                   + "duree = ?, dateretoureffectif = ? "
                    + "WHERE numero = ? AND datereserv = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -149,9 +149,9 @@ public class Passerelle {
             } else {
                 stmt.setNull(6, Types.DATE);
             }
-            stmt.setString(7, etat);
-            stmt.setInt(8, numero);
-            stmt.setDate(9, java.sql.Date.valueOf(datereserv));
+            // stmt.setString(7, etat);
+            stmt.setInt(7, numero);
+            stmt.setDate(8, java.sql.Date.valueOf(datereserv));
 
             int lignes = stmt.executeUpdate();
             if (lignes > 0) {
