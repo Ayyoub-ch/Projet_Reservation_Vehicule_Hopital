@@ -1,3 +1,21 @@
-HEAD
 # Projet_Reservation_Vehicule_Hopital
-Ancien Projet Reservation de Vehicule Hopital, avec une version en groupe et celle complète
+
+Langage Utilisé: Java
+
+
+Contexte du Projet :Projet d'Atelier Professionnel fait en 2e Année de BTS SIO, autour du contexte d'un Hôpital souhaitant une application console afin de gérer les réservations de véhicule de l'Hôpital
+
+
+Besoin: Une application console de gestion de réservation de véhicule. L'utilisateur doit pouvoir se connecter, avoir la possibilité de faire une réservation, la modifier, l'annuler, la valider ou de les voir.
+
+
+Le but de cette application est de pouvoir :
+- Créer une réservation
+- La vérifier puis la valider
+- afficher ses réservations
+
+Il y a 2 versions :
+- Une version faite lors du travail de Groupe qui est incomplète et n'est pas fonctionnelle
+- Une version faite seul après la deadline du travail et qui est complète
+
+
