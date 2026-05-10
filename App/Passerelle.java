@@ -83,7 +83,7 @@ public class Passerelle {
                 String role = rs.getString("role");
 
                 this.matriculeConnecte = matricule;
-                this.roleConnecte = (role != null && role.equalsIgnoreCase("role_admin"))
+                this.roleConnecte = (role != null && role.equalsIgnoreCase("admin"))
                         ? "Admin"
                         : "User";
 
