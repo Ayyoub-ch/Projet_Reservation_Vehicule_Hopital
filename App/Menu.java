@@ -11,7 +11,7 @@ public class Menu {
         boolean continuer = true;
         String role = db.getRoleConnecte();
         boolean isAdmin = "Admin".equals(role);
-
+        
         while (continuer) {
             clearConsole();
             afficherBienvenue();
@@ -21,6 +21,7 @@ public class Menu {
             } else {
                 System.out.println("\n===== MENU PRINCIPAL =====");
             }
+
 
             System.out.println("1. Faire une réservation");
             System.out.println("2. Vérifier la disponibilité d'un véhicule");
