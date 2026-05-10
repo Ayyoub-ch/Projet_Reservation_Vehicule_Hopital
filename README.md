@@ -18,7 +18,7 @@ Le but de cette application est de pouvoir :
 Fonctionnalités:
 - Se connecter en tant qu'utilisateur ou administrateur (chacun des rôles ont des fonctions différentes)
 
-* Utilisateur:
+Utilisateur:
 - Créer une réservation
 - Vérifier la disponibilité d'un véhicule
 - Modifier une réservation
@@ -26,7 +26,7 @@ Fonctionnalités:
 - Quitter le menu
 
 
-* Administrateur:
+Administrateur:
 - Créer une réservation
 - Vérifier la disponibilité d'un véhicule
 - Modifier une réservation
