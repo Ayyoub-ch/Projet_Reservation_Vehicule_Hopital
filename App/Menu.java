@@ -310,12 +310,12 @@ public class Menu {
                 String dateRetourStr = s.nextLine();
                 LocalDate dateRetourEffectif = dateRetourStr.isBlank() ? null : LocalDate.parse(dateRetourStr);
 
-                System.out.print("État de la réservation : ");
-                String etat = s.nextLine();
+                // System.out.print("État de la réservation : ");
+                // String etat = s.nextLine();
 
                 // Appel à la passerelle
                 db.modifierReservation(numero, datereserv, dateDebut, matricule, noType, immat, duree,
-                        dateRetourEffectif, etat);
+                        dateRetourEffectif);
             }
         } catch (Exception e) {
             System.out.println("\nERREUR - " + e.getMessage());
@@ -330,6 +330,8 @@ public class Menu {
         System.out.println("\n===== VALIDATION DES RESERVATIONS [ADMIN] =====");
 
         db.afficherReservationsEnAttente();
+
+        db.afficherReservationsEnCours(); // Affiche les réservations en cours de validation
 
         System.out.println("\nEntrez le numéro de la réservation à traiter (0 pour annuler) : ");
         int numero;
