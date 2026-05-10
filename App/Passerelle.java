@@ -333,7 +333,7 @@ public class Passerelle {
                    + "JOIN personne p ON d.matricule = p.matricule "
                    + "JOIN vehicule v ON d.immat = v.immat "
                    + "JOIN type t ON d.notype = t.noType "
-                   + "WHERE d.etat = 'En attente' "
+                   + "WHERE d.etat = 'En attente' OR d.etat = 'en attente' "
                    + "ORDER BY d.datereserv ASC";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql);
@@ -360,9 +360,45 @@ public class Passerelle {
         }
     }
 
+    public void afficherReservationsEnCours() {
+        String sql = "SELECT d.numero, d.datereserv, d.datedebut, d.duree, "
+                   + "p.nom, p.prenom, p.matricule, "
+                   + "v.marque, v.modele, v.immat, "
+                   + "t.libelle AS typeLibelle "
+                   + "FROM demande d "
+                   + "JOIN personne p ON d.matricule = p.matricule "
+                   + "JOIN vehicule v ON d.immat = v.immat "
+                   + "JOIN type t ON d.notype = t.noType "
+                   + "WHERE d.etat = 'En Cours' OR d.etat = 'en cours' "
+                   + "ORDER BY d.datereserv ASC";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("\n=== RESERVATIONS EN COURS ===");
+            boolean trouve = false;
+            while (rs.next()) {
+                trouve = true;
+                System.out.println("\nReservation N°" + rs.getInt("numero")
+                        + " du " + rs.getDate("datereserv"));
+                System.out.println("  Employe          : " + rs.getString("prenom") + " "
+                        + rs.getString("nom") + " (matricule : " + rs.getString("matricule") + ")");
+                System.out.println("  Date debut       : " + rs.getDate("datedebut"));
+                System.out.println("  Duree            : " + rs.getInt("duree") + " jour(s)");
+                System.out.println("  Type vehicule    : " + rs.getString("typeLibelle"));
+                System.out.println("  Vehicule         : " + rs.getString("marque") + " "
+                        + rs.getString("modele") + " (" + rs.getString("immat") + ")");
+            }
+            if (!trouve) System.out.println("Aucune reservation en cours.");
+
+        } catch (SQLException e) {
+            System.out.println("ERREUR - " + e.getMessage());
+        }
+    }
+
     public boolean validerReservation(int numero, LocalDate datereserv) {
         String sql = "UPDATE demande SET etat = 'Validee' "
-                   + "WHERE numero = ? AND datereserv = ? AND etat = 'En attente'";
+                   + "WHERE numero = ? AND datereserv = ? AND etat = 'En attente' OR etat = 'en attente' OR etat = 'En Cours' OR etat = 'en cours'";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, numero);
             stmt.setDate(2, java.sql.Date.valueOf(datereserv));
@@ -382,7 +418,7 @@ public class Passerelle {
 
     public boolean refuserReservation(int numero, LocalDate datereserv) {
         String sql = "UPDATE demande SET etat = 'Refusee' "
-                   + "WHERE numero = ? AND datereserv = ? AND etat = 'En attente'";
+                   + "WHERE numero = ? AND datereserv = ? AND etat = 'En attente' OR etat = 'en attente' OR etat = 'En Cours' OR etat = 'en cours'";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, numero);
             stmt.setDate(2, java.sql.Date.valueOf(datereserv));
